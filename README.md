@@ -24,7 +24,7 @@ const formFields = [
   },
   // ... 19 more fields
 ];
-
+```
 Benefits:
 
     ✅ Add new fields in seconds (just add to array)
@@ -36,7 +36,7 @@ Benefits:
 
 Instead of writing 20 different validation functions, I created ONE smart function that handles ALL validation types:
 
-javascript
+```javascript
 
 export const validateField = (value, validations, formData) => {
   for (const validation of validations) {
@@ -50,7 +50,7 @@ export const validateField = (value, validations, formData) => {
   }
   return error || null;
 };
-
+```
 Benefits:
 
     ✅ Write validation logic once, use everywhere
@@ -62,7 +62,7 @@ Benefits:
 
 Instead of copying/pasting 20 <input> elements, I use JavaScript's .map() to generate them dynamically:
 
-javascript
+```javascript
 
 {formFields.map((field) => (
   <FormInput
@@ -74,7 +74,7 @@ javascript
     onBlur={handleBlur}
   />
 ))}
-
+```
 Benefits:
 
     ✅ 5 lines of code instead of 200+
@@ -85,7 +85,7 @@ Benefits:
 
 Created a single FormInput component that adapts to different field types:
 
-javascript
+```javascript
 
 const FormInput = ({ field, value, error, onChange, onBlur }) => {
   switch (field.type) {
@@ -94,7 +94,7 @@ const FormInput = ({ field, value, error, onChange, onBlur }) => {
     default: return <input type={field.type} {...props} />;
   }
 };
-
+```
 Benefits:
 
     ✅ One component handles text, email, number, date, textarea, checkbox, etc.
@@ -105,7 +105,7 @@ Benefits:
 
 Used React's useState with dynamic object initialization:
 
-javascript
+```javascript
 
 // Initialize form data from config automatically
 const initialFormData = formFields.reduce((acc, field) => {
@@ -114,7 +114,7 @@ const initialFormData = formFields.reduce((acc, field) => {
 }, {});
 
 const [formData, setFormData] = useState(initialFormData);
-
+```
 Benefits:
 
     ✅ No manual state setup for each field
@@ -124,7 +124,7 @@ Benefits:
 📊 Code Comparison
 ❌ Traditional Approach (What the Evil Manager Wanted)
 
-javascript
+```javascript
 
 // 20 separate state variables
 const [firstName, setFirstName] = useState('');
@@ -154,12 +154,12 @@ const validateEmail = (value) => { /* ... */ };
   {lastNameError && <span>{lastNameError}</span>}
 </div>
 // ... 18 more
-
+```
 // TOTAL: ~400-500 lines of repetitive code 😱
 
 ✅ Smart Approach (My Solution)
 
-javascript
+```javascript
 
 // 1 configuration array (in separate file)
 const formFields = [ /* 20 field configs */ ];
@@ -178,12 +178,12 @@ const handleChange = (e) => {
 
 // 1 map function to render all fields
 {formFields.map(field => <FormInput {...field} />)}
-
+```
 // TOTAL: ~80-100 lines of clean, maintainable code ✨
 
 🚀 How to Run
 
-bash
+```bash
 
 # Clone the repository
 git clone <your-repo-url>
@@ -194,7 +194,7 @@ npm install
 
 # Run the development server
 npm start
-
+```
 Open http://localhost:3000 to view it in your browser.
 🎯 Key Features
 
@@ -209,7 +209,7 @@ Open http://localhost:3000 to view it in your browser.
 
 Want to add field #21? Just add one object to the config:
 
-javascript
+```javascript
 
 // In formConfig.js
 {
@@ -222,7 +222,7 @@ javascript
     { type: 'required', message: 'This field is required' }
   ]
 }
-
+```
 That's it! The form automatically:
 
     Renders the new input
@@ -234,7 +234,7 @@ That's it! The form automatically:
 
 Want to add a custom validation? Just add a case to the validator:
 
-javascript
+```javascript
 
 // In validators.js
 case 'customRule':
@@ -242,15 +242,15 @@ case 'customRule':
     return message;
   }
   break;
-
+```
 Then use it in any field config:
 
-javascript
+```javascript
 
 validations: [
   { type: 'customRule', message: 'Custom validation failed' }
 ]
-
+```
 🎨 Customization
 Change Styling
 
@@ -403,7 +403,7 @@ text
     ]
   }
 }
-
+```
 🎯 Summary
 
 This solution demonstrates professional software engineering principles:
